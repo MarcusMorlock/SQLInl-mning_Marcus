@@ -2,6 +2,8 @@ import pandas as pd
 from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 
+# Skapar och returnerar SQLAlchemy‑engine för anslutning till SQL Server.
+
 def connect_to_sql():
     user = "SA"
     password = quote_plus("Xardas519!")

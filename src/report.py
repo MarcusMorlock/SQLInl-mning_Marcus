@@ -1,6 +1,8 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
 
+# Wrapper‑klass som kör SQL‑queries och returnerar DataFrames till notebooken.
+
 from .io_utiles import (connect_to_sql
                         
                         )
