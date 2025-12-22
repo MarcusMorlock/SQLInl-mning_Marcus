@@ -4,3 +4,6 @@ import pandas as pd
 
 def product_per_category(df: pd.DataFrame) -> pd.DataFrame:
     return df
+
+def sell_product_per_category(df: pd.DataFrame) -> pd.DataFrame:
+    return df
