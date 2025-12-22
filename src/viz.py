@@ -29,7 +29,7 @@ def viz_products_per_category(df: pd.DataFrame) -> plt:
 
 def viz_total_sell_per_category(df: pd.DataFrame) -> plt:
 
-    fig ,ax = plt.subplots(figsize=(10,4))
+    fig ,ax = plt.subplots(figsize=(12,4))
     df = df.sort_values("Revenue", ascending=True)
     bars = ax.barh(df["Productname"], df["Revenue"])
 
@@ -41,7 +41,7 @@ def viz_total_sell_per_category(df: pd.DataFrame) -> plt:
                 va="center", ha="left", fontsize=10)
 
     ax.set_xlim(0, df["Revenue"].max() * 1.15)
-
+    ax.ticklabel_format(style="plain", axis="x")
     plt.tight_layout()
 
     return fig, ax
