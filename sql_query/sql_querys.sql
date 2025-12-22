@@ -36,3 +36,20 @@ GROUP BY pc.Name
 ORDER BY SUM(sod.LineTotal) DESC
 
 
+
+SELECT *
+FROM Sales.SalesOrderDetail
+
+SELECT *
+FROM Sales.SalesOrderHeader
+
+SELECT
+
+    YEAR(soh.OrderDate) as OrderYear,
+    MONTH(soh.OrderDate) as OrderMonth,
+    SUM(sod.LineTotal) as Revenue
+
+FROM Sales.SalesOrderHeader as soh
+INNER JOIN Sales.SalesOrderDetail as sod on soh.SalesOrderID = sod.SalesOrderID
+GROUP BY YEAR(soh.OrderDate), MONTH(soh.OrderDate)
+ORDER BY  YEAR(soh.OrderDate), MONTH(soh.OrderDate) ASC
