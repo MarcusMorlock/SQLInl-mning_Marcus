@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-
+from src.metrics import(
+    year_month_combined,
+)
 # Innehåller alla matplotlib‑visualiseringar. Tar emot färdigprocessade DataFrames från metrics.
 
 def viz_products_per_category(df: pd.DataFrame) -> plt:
@@ -43,3 +45,4 @@ def viz_total_sell_per_category(df: pd.DataFrame) -> plt:
     plt.tight_layout()
 
     return fig, ax
+
