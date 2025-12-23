@@ -39,9 +39,11 @@ def viz_total_sell_per_category(df: pd.DataFrame) -> plt:
                 bar.get_y() + bar.get_height()/2,
                 f"{int(width):,}",
                 va="center", ha="left", fontsize=10)
-
+    ax.set_xlabel("Revenue")
     ax.set_xlim(0, df["Revenue"].max() * 1.15)
     ax.ticklabel_format(style="plain", axis="x")
+    ax.legend()
+    ax.grid(True, axis="x", alpha=0.5)
     plt.tight_layout()
 
     return fig, ax
@@ -63,3 +65,24 @@ def viz_sell_per_month(df: pd.DataFrame) -> plt:
 
     return fig, ax
 
+def viz_sell_order_per_month(df: pd.DataFrame) -> plt:
+    fig ,ax = plt.subplots(figsize=(8,6))
+    X = df["OrderYear"].astype(int)
+    Y = df["AmountOrders"]
+    Y2 = df["Revenue"]
+
+    width = 0.4
+
+    bars_amount_orders  = ax.bar(X + width/2, Y, label="AmountOrders", color="steelblue", width= 0.6)
+    bars_revenue = ax.bar(X - width/2, Y2 / 3000, label="Revenue(Scaled)", color="orange", width= 0.6)
+    ax.set_title("Försäljning och antal ordrar per år")
+    ax.set_xticklabels(X)
+    ax.set_xticks(X)
+    ax.set_ylabel("Scaled Values(Revenue / 3000)", fontsize="12")
+
+    ax.grid(True, axis="y", alpha=0.5, color="black")
+    ax.legend()
+
+    plt.tight_layout()
+    
+    return fig, ax

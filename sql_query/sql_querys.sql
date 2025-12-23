@@ -51,5 +51,28 @@ SELECT
 
 FROM Sales.SalesOrderHeader as soh
 INNER JOIN Sales.SalesOrderDetail as sod on soh.SalesOrderID = sod.SalesOrderID
+WHERE YEAR(soh.OrderDate) < 2025
 GROUP BY YEAR(soh.OrderDate), MONTH(soh.OrderDate)
 ORDER BY  YEAR(soh.OrderDate), MONTH(soh.OrderDate) ASC
+
+
+SELECT
+
+    YEAR(soh.OrderDate) as OrderYear,
+    MONTH(soh.OrderDate) as OrderMonth,
+    SUM(soh.SubTotal) as Revenue
+
+FROM Sales.SalesOrderHeader as soh
+WHERE YEAR(soh.OrderDate) < 2025
+GROUP BY YEAR(soh.OrderDate), MONTH(soh.OrderDate)
+ORDER BY YEAR(soh.OrderDate), MONTH(soh.OrderDate) ASC
+
+SELECT
+
+COUNT(*) as AmountOrders,
+YEAR(soh.OrderDate) as OrderYear,
+SUM(soh.SubTotal) as Revenue
+
+FROM Sales.SalesOrderHeader as soh
+GROUP BY YEAR(soh.OrderDate)
+ORDER BY YEAR(soh.OrderDate) ASC
