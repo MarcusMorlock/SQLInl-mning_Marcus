@@ -39,9 +39,11 @@ def viz_total_sell_per_category(df: pd.DataFrame) -> plt:
                 bar.get_y() + bar.get_height()/2,
                 f"{int(width):,}",
                 va="center", ha="left", fontsize=10)
-
+    ax.set_xlabel("Revenue")
     ax.set_xlim(0, df["Revenue"].max() * 1.15)
     ax.ticklabel_format(style="plain", axis="x")
+    ax.legend()
+    ax.grid(True, axis="x", alpha=0.5)
     plt.tight_layout()
 
     return fig, ax
