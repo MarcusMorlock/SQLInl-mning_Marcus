@@ -94,3 +94,5 @@ FROM Production.Product as p
 INNER JOIN Sales.SalesOrderDetail as sod ON p.ProductID = sod.ProductID
 GROUP BY p.Name
 ORDER BY Revenue DESC
+
+
