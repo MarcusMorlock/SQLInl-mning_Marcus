@@ -76,3 +76,21 @@ SUM(soh.SubTotal) as Revenue
 FROM Sales.SalesOrderHeader as soh
 GROUP BY YEAR(soh.OrderDate)
 ORDER BY YEAR(soh.OrderDate) ASC
+
+SELECT *
+FROM Production.Product
+
+
+SELECT *
+FROM Sales.SalesOrderDetail
+
+
+SELECT TOP 10
+
+p.Name as ProductName,
+SUM(sod.LineTotal) as Revenue
+
+FROM Production.Product as p
+INNER JOIN Sales.SalesOrderDetail as sod ON p.ProductID = sod.ProductID
+GROUP BY p.Name
+ORDER BY Revenue DESC
