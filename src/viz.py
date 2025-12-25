@@ -27,7 +27,7 @@ def viz_products_per_category(df: pd.DataFrame) -> plt:
 
     return fig, ax
 
-def viz_total_sell_per_category(df: pd.DataFrame, title :str) -> plt:
+def viz_barh_by_revenue(df: pd.DataFrame, title :str) -> plt:
     
     fig ,ax = plt.subplots(figsize=(12,4))
     df = df.sort_values("Revenue", ascending=True)
