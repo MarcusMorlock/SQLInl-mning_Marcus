@@ -14,7 +14,7 @@ FROM Sales.SalesOrderDetail
 
 SELECT
 
-    pc.Name as Productname,
+    pc.Name as ProductName,
     COUNT(DISTINCT(p.ProductID)) as amount
 
 FROM Production.ProductCategory as pc
@@ -25,7 +25,7 @@ GROUP BY pc.Name
 
 SELECT
 
-    pc.Name as Productname,
+    pc.Name as ProductName,
     SUM(sod.LineTotal) as Revenue
 
 FROM Production.ProductCategory as pc
@@ -95,4 +95,27 @@ INNER JOIN Sales.SalesOrderDetail as sod ON p.ProductID = sod.ProductID
 GROUP BY p.Name
 ORDER BY Revenue DESC
 
+SELECT 
+*
+FROM Sales.SalesTerritory
 
+SELECT
+*
+FROM Sales.SalesOrderHeader
+
+SELECT
+*
+FROM Sales.Customer
+
+
+SELECT
+
+    COUNT(DISTINCT(c.CustomerID)) as AmountCustomers,
+    st.Name as Region,
+    SUM(soh.SubTotal) as Revenue
+    
+FROM Sales.Customer as c
+INNER JOIN Sales.SalesOrderHeader as soh on c.CustomerID = soh.CustomerID
+INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
+GROUP BY st.Name
+ORDER BY Revenue DESC
