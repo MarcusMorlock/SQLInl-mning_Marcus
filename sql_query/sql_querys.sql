@@ -119,3 +119,4 @@ INNER JOIN Sales.SalesOrderHeader as soh on c.CustomerID = soh.CustomerID
 INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
 GROUP BY st.Name
 ORDER BY Revenue DESC
+
