@@ -9,7 +9,7 @@ def viz_products_per_category(df: pd.DataFrame) -> plt:
 
     fig ,ax = plt.subplots(figsize=(8,6))
 
-    products = ax.bar(df["Productname"], df["amount"])
+    products = ax.bar(df["ProductName"], df["amount"])
     
    
     for bar in products:
