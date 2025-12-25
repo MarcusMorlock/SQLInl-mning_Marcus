@@ -113,7 +113,7 @@ SELECT
     COUNT(DISTINCT(c.CustomerID)) as AmountCustomers,
     st.Name as Region,
     SUM(soh.SubTotal) as Revenue
-    
+
 FROM Sales.Customer as c
 INNER JOIN Sales.SalesOrderHeader as soh on c.CustomerID = soh.CustomerID
 INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
