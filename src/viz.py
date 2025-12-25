@@ -117,7 +117,7 @@ def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title) -> plt:
 
     width = 0.4
 
-    bars_1  = ax.bar(position + width/2, Y, label="AmountCustomers", color="steelblue", width= 0.6)
+    bars_1  = ax.bar(position + width/2, Y, label=f"{Y_target}", color="steelblue", width= 0.6)
     bars_2 = ax.bar(position - width/2, Y2 / 3000, label="Revenue(Scaled)", color="orange", width= 0.6)
     
 
@@ -125,23 +125,24 @@ def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title) -> plt:
 
         #Bar1
 
-        h1 = bar_1.get_height() + 3
+        h1 = bar_1.get_height()
         ax.text(
-            bar_1.get_x() + bar_1.get_width()/2, h1 +3,
+            bar_1.get_x() + bar_1.get_width()/2, h1 +75,
             str(int(h1)), ha="center", va="bottom", color="Black", fontweight="bold"
         )
 
         #Bar2
 
-        h2 = bar_2.get_height() + 3
+        h2 = bar_2.get_height()
         ax.text(
-            bar_2.get_x() + bar_2.get_width()/2, h2 +3,
+            bar_2.get_x() + bar_2.get_width()/2, h2 +150,
             str(int(h2)), ha="center", va="bottom", color="Black", fontweight="bold"
         )
     ax.set_title(f"{title}")
     ax.set_xticklabels(X)
     ax.set_xticks(position)
     ax.set_ylabel("Scaled Values(Revenue / 3000)", fontsize="12")
+    ax.set_xlabel(f"{X_target}")
 
     ax.grid(True, axis="y", alpha=0.2, color="black")
     ax.legend()
