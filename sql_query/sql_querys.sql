@@ -158,3 +158,23 @@ GROUP BY
         ELSE 'Private'
     END
 ORDER BY AvgOrderValue DESC;
+
+SELECT 
+
+    st.Name as Region,
+    SUM(CASE WHEN c.StoreID IS NOT NULL THEN soh.SubTotal END) * 1.0 / 
+    COUNT(CASE WHEN c.StoreID IS NOT NULL THEN soh.SalesOrderID END) AS StoreAvg,
+    SUM(CASE WHEN c.StoreID IS NULL THEN soh.SubTotal END) * 1.0 /
+    COUNT(CASE WHEN c.StoreID IS NULL THEN soh.SalesOrderID END) AS PrivateAvg
+
+
+FROM Sales.SalesOrderHeader as soh
+INNER JOIN Sales.Customer as c on soh.CustomerID = c.CustomerID
+INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
+
+GROUP BY st.Name
+ORDER BY (    SUM(CASE WHEN c.StoreID IS NOT NULL THEN soh.SubTotal END) * 1.0 / 
+    COUNT(CASE WHEN c.StoreID IS NOT NULL THEN soh.SalesOrderID END) 
+    +     
+    SUM(CASE WHEN c.StoreID IS NULL THEN soh.SubTotal END) * 1.0 /
+    COUNT(CASE WHEN c.StoreID IS NULL THEN soh.SalesOrderID END)) / 2 DESC;

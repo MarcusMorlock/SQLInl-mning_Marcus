@@ -108,7 +108,7 @@ def viz_sell_order_per_month(df: pd.DataFrame) -> plt:
     
     return fig, ax
 
-def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title) -> plt:
+def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title, Y_label) -> plt:
     fig ,ax = plt.subplots(figsize=(12,6))
     X = df[f"{X_target}"]
     Y = df[f"{Y_target}"]
@@ -118,7 +118,9 @@ def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title) -> plt:
     width = 0.4
 
     bars_1  = ax.bar(position + width/2, Y, label=f"{Y_target}", color="steelblue", width= 0.6)
-    bars_2 = ax.bar(position - width/2, Y2 / 3000, label="Revenue(Scaled)", color="orange", width= 0.6)
+    bars_2 = ax.bar(position - width/2, Y2, label=f"{Y2_target}", color="orange", width= 0.6)
+
+    
     
 
     for bar_1, bar_2 in zip(bars_1, bars_2):
@@ -141,10 +143,12 @@ def viz_two_bar(df: pd.DataFrame, X_target,Y_target,Y2_target,title) -> plt:
     ax.set_title(f"{title}")
     ax.set_xticklabels(X)
     ax.set_xticks(position)
-    ax.set_ylabel("Scaled Values(Revenue / 3000)", fontsize="12")
+    ax.set_ylabel(f"{Y_label}", fontsize="12")
     ax.set_xlabel(f"{X_target}")
 
     ax.grid(True, axis="y", alpha=0.2, color="black")
     ax.legend()
 
     plt.tight_layout()
+
+    return fig, ax
