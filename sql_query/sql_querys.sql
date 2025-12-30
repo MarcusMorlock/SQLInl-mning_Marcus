@@ -119,3 +119,62 @@ INNER JOIN Sales.SalesOrderHeader as soh on c.CustomerID = soh.CustomerID
 INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
 GROUP BY st.Name
 ORDER BY Revenue DESC
+
+SELECT
+*
+FROM Sales.SalesTerritory
+
+SELECT
+*
+FROM Sales.SalesOrderHeader
+
+SELECT
+*
+FROM Sales.Customer
+
+SELECT
+*
+FROM Sales.Store
+
+
+SELECT
+
+    st.Name AS Region,
+    CASE
+        WHEN c.StoreID IS NOT NULL THEN 'Store'
+        ELSE 'Private'
+    END AS CustomerType,
+    SUM(soh.SubTotal) AS TotalRevenue,
+    COUNT(soh.SalesOrderID) AS OrderCount,
+    SUM(soh.SubTotal) * 1.0 / COUNT(soh.SalesOrderID) AS AvgOrderValue
+
+FROM Sales.SalesOrderHeader as soh
+INNER JOIN Sales.Customer as c on soh.CustomerID = c.CustomerID
+INNER JOIN Sales.SalesTerritory as st on c.TerritoryID = st.TerritoryID
+GROUP BY
+    st.Name,
+    CASE
+        WHEN c.StoreID IS NOT NULL THEN 'Store'
+        ELSE 'Private'
+    END
+ORDER BY AvgOrderValue DESC;
+
+SELECT 
+
+    st.Name as Region,
+    SUM(CASE WHEN c.StoreID IS NOT NULL THEN soh.SubTotal END) * 1.0 / 
+    COUNT(CASE WHEN c.StoreID IS NOT NULL THEN soh.SalesOrderID END) AS StoreAvg,
+    SUM(CASE WHEN c.StoreID IS NULL THEN soh.SubTotal END) * 1.0 /
+    COUNT(CASE WHEN c.StoreID IS NULL THEN soh.SalesOrderID END) AS PrivateAvg
+
+
+FROM Sales.SalesOrderHeader as soh
+INNER JOIN Sales.Customer as c on soh.CustomerID = c.CustomerID
+INNER JOIN Sales.SalesTerritory as st on soh.TerritoryID = st.TerritoryID
+
+GROUP BY st.Name
+ORDER BY (    SUM(CASE WHEN c.StoreID IS NOT NULL THEN soh.SubTotal END) * 1.0 / 
+    COUNT(CASE WHEN c.StoreID IS NOT NULL THEN soh.SalesOrderID END) 
+    +     
+    SUM(CASE WHEN c.StoreID IS NULL THEN soh.SubTotal END) * 1.0 /
+    COUNT(CASE WHEN c.StoreID IS NULL THEN soh.SalesOrderID END)) / 2 DESC;
