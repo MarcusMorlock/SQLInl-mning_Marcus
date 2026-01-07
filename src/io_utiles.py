@@ -6,7 +6,7 @@ from urllib.parse import quote_plus
 
 def connect_to_sql():
     user = "SA"
-    password = quote_plus("Xardas519!")
+    password = quote_plus("")
     server = "localhost:1433"
     database = "AdventureWorks2025"
     driver = quote_plus("ODBC Driver 17 for SQL Server")
